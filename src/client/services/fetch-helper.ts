@@ -15,8 +15,8 @@ export const fetcher = <T = any>(url: string, method: method_types = 'GET', data
                 delete fetchOptions.headers;
                 delete fetchOptions.body;
             }
-
-            const res = await fetch(url);
+            // console.log(fetchOptions);
+            const res = await fetch(url, fetchOptions);
             const resData = await res.json(); // your fetcher will always run this line, which gets us pre-parsed data in our .then chain
 
             if (res.ok) {

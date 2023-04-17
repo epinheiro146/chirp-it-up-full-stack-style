@@ -23,7 +23,7 @@ const Create = () => {
             return;
         }
 
-        fetcher("/api/chirps", "POST", { chirp })
+        fetcher("/api/chirps", "POST", { content: chirp })
             .then((data: any) => {
                 swal("Nice!", `${data.message}`, "success");
                 nav(`/chirps/${data.id}`)
