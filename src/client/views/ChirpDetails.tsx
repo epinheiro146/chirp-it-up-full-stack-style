@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Chirp } from "../../types";
+import { ChirpWUser } from "../../types";
 import { useParams, Link } from "react-router-dom";
 import { fetcher } from "../services/fetch-helper";
 import swal from "sweetalert";
 
 const ChirpDetails = () => {
-    const [chirp, setChirp] = useState<Chirp>();
+    const [chirp, setChirp] = useState<ChirpWUser>();
     const { id } = useParams();
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const ChirpDetails = () => {
             <div className="col-12 col-md-8">
                 <div className="card text-bg-dark shadow-lg">
                     <div className="card-title text-center">
-                        <p>Chirp #{chirp?.id} from User #{chirp?.userid}</p>
+                        <p>chirp#{chirp?.id} from {<Link className="text-light" to={`/users/${chirp?.userid}`}>{chirp?.username}:</Link>}:</p>
                     </div>
                     <div className="card-body">
                         <p>{chirp?.content}</p>

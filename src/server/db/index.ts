@@ -3,7 +3,7 @@ import { dbCredentials } from '../config';
 
 const pool = mysql.createPool(dbCredentials);
 
-export const Query = <t = mysql.OkPacket>(query: string, values?: Array<string | number>) => {
+export const Query = <t = mysql.OkPacket>(query: string, values?: unknown[]) => {
     return new Promise<t>((resolve, reject) => {
 
         pool.query(query, values, (err, results) => {

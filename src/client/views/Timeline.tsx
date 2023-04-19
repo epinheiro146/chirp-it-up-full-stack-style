@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { Chirp } from "../../types";
+import { ChirpWUser } from "../../types";
 import { Link } from "react-router-dom";
 import { fetcher } from "../services/fetch-helper";
 import swal from "sweetalert";
 
 const Timeline = () => {
-    const [chirps, setChirps] = useState<Chirp[]>([]);
+    const [chirps, setChirps] = useState<ChirpWUser[]>([]);
 
     useEffect(() => {
         fetcher(`/api/chirps`)
@@ -27,19 +27,21 @@ const Timeline = () => {
             <h1>Timeline</h1>
             {chirps.map(chirp => (
                 <div className="col-12 col-md-4 col-lg-3 my-2" key={`chirp-${chirp.id}`}>
-                    <Link to={`/chirps/${chirp.id}`}>
-                        <div className="card text-bg-dark shadow-lg">
-                            <div className="card-title">
-                                <p>User #{chirp.userid}</p>
-                            </div>
+                    <div className="card text-bg-dark shadow-lg">
+                        <div className="card-title">
+                            <Link className="text-light" to={`/users/${chirp.userid}`}>
+                                <p>{chirp.username}:</p>
+                            </Link>
+                        </div>
+                        <Link className="text-reset text-decoration-none" to={`/chirps/${chirp.id}`}>
                             <div className="card-body">
                                 <p>{chirp.content}</p>
                             </div>
                             <div className="card-footer">
                                 <p>{chirp?._created ? `${new Date(chirp?._created).toLocaleString()}` : ""}</p>
                             </div>
-                        </div>
-                    </Link>
+                        </Link>
+                    </div>
                 </div>
             ))}
         </div>

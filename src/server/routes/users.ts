@@ -15,11 +15,11 @@ router.get('/', async (req, res) => {
 });
 
 // GET /api/users/?
-router.get('/:id', async (req, res) => {
+router.get('/mentions/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id);
-        const user = await Users.getById(id);
-        res.json(user[0]);
+        const userMentions = await Users.getById(id);
+        res.json(userMentions);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Tried getting a user, but something went wrong." })
