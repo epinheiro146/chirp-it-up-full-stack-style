@@ -1,5 +1,5 @@
 import { Query } from "..";
-import { Chirp, ChirpWUser } from "../../../types";
+import { ChirpWUser } from "../../../types";
 
 const getAll = () => Query<ChirpWUser[]>(
     `SELECT

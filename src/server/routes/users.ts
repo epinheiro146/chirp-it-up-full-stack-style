@@ -14,15 +14,39 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET /api/users/?
+// GET /api/users/123
+router.get('/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        const user = await Users.getById(id);
+        res.json(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Tried getting this user, but something went wrong." })
+    }
+});
+
+// GET /api/users/chirps/123
+router.get('/chirps/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        const userChirps = await Users.getChirps(id);
+        res.json(userChirps);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Tried getting this user's chirps, but something went wrong." })
+    }
+});
+
+// GET /api/users/mentions/123
 router.get('/mentions/:id', async (req, res) => {
     try {
         const id = parseInt(req.params.id);
-        const userMentions = await Users.getById(id);
+        const userMentions = await Users.getMentionsById(id);
         res.json(userMentions);
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Tried getting a user, but something went wrong." })
+        res.status(500).json({ message: "Tried getting chirps this user has been mentioned in, but something went wrong." })
     }
 });
 

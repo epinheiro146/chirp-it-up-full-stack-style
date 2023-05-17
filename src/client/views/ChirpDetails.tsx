@@ -26,7 +26,7 @@ const ChirpDetails = () => {
             <div className="col-12 col-md-8">
                 <div className="card text-bg-dark shadow-lg">
                     <div className="card-title text-center">
-                        <p>chirp#{chirp?.id} from {<Link className="text-light" to={`/users/${chirp?.userid}`}>{chirp?.username}:</Link>}:</p>
+                        <p>chirp#{chirp?.id} from {<Link className="text-light" to={`/users/${chirp?.userid}`}>{chirp?.username}:</Link>}</p>
                     </div>
                     <div className="card-body">
                         <p>{chirp?.content}</p>

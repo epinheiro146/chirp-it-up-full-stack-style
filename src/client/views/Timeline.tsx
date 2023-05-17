@@ -24,13 +24,13 @@ const Timeline = () => {
 
     return (
         <div className="mt-5">
-            <h1>Timeline</h1>
+            <h1 className="p-2">Timeline</h1>
             {chirps.map(chirp => (
-                <div className="col-12 col-md-4 col-lg-3 my-2" key={`chirp-${chirp.id}`}>
+                <div className="col-12 col-md-4 col-lg-3 m-2" key={`chirp-${chirp.id}`}>
                     <div className="card text-bg-dark shadow-lg">
                         <div className="card-title">
                             <Link className="text-light" to={`/users/${chirp.userid}`}>
-                                <p>{chirp.username}:</p>
+                                <p className="mx-2">{chirp.username}:</p>
                             </Link>
                         </div>
                         <Link className="text-reset text-decoration-none" to={`/chirps/${chirp.id}`}>

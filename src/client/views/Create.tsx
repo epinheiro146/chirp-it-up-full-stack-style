@@ -69,8 +69,11 @@ const Create = () => {
                     </div>
                     <div className="card-body">
                         <div>
-                            <textarea className="form-control" value={chirp} onChange={e => setChirp(e.target.value)} />
-                            <button onClick={handleSubmitButton} className="btn btn-outline-success">Submit</button>
+                            <span className={`${chirp.length >= MAX_CHIRP_LENGTH ? "text-danger" : "text-light"}`}>
+                                {chirp.length}/{MAX_CHIRP_LENGTH}
+                            </span>
+                            <textarea className="form-control" value={chirp} maxLength={MAX_CHIRP_LENGTH} onChange={e => setChirp(e.target.value)} />
+                            <button onClick={handleSubmitButton} className="btn btn-outline-success mt-2">Submit</button>
                         </div>
                     </div>
                 </div>

@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Chirp } from "../../types";
 import { fetcher } from "../services/fetch-helper";
+import swal from "sweetalert";
 
-import swal from "sweetalert"; // completely optional, just looks nice
+const MAX_CHIRP_LENGTH = 280;
 
 const Edit = () => {
     const { id } = useParams();
@@ -33,6 +34,16 @@ const Edit = () => {
     }, [id]);*/
 
     const handleSaveChanges = () => {
+
+        if (!updatedChirp) {
+            swal("Feeling shy?", "Please enter some content!", "error");
+            return;
+        }
+
+        if (updatedChirp.length > MAX_CHIRP_LENGTH) {
+            swal("OK, settle down...", `Your chirp has to be under ${MAX_CHIRP_LENGTH} characters.`, "error");
+            return;
+        }
 
         fetcher(`/api/chirps/${id}`, "PUT", { content: updatedChirp })
             .then(data => {
@@ -88,9 +99,12 @@ const Edit = () => {
                     <div className="card-body">
                         {chirpDetails && ( // controlled React input: makes sure that your state exists, then runs the following if it does
                             <div>
-                                <textarea className="form-control" value={updatedChirp} onChange={e => setUpdatedChirp(e.target.value)} />
-                                <button onClick={handleSaveChanges} className="btn btn-outline-success">Save Changes</button>
-                                <button onClick={handleDelete} className="btn btn-outline-danger mx-2">Delete</button>
+                                <span className={`${updatedChirp.length >= MAX_CHIRP_LENGTH ? "text-danger" : "text-light"}`}>
+                                    {updatedChirp.length}/{MAX_CHIRP_LENGTH}
+                                </span>
+                                <textarea className="form-control" value={updatedChirp} maxLength={MAX_CHIRP_LENGTH} onChange={e => setUpdatedChirp(e.target.value)} />
+                                <button onClick={handleSaveChanges} className="btn btn-outline-success mt-2">Save Changes</button>
+                                <button onClick={handleDelete} className="btn btn-outline-danger mx-2 mt-2">Delete</button>
                             </div>
                         )}
                     </div>

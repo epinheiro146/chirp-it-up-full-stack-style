@@ -5,7 +5,11 @@ const create = (userid: User['id'], chirpid: Chirp['id']) => Query("INSERT INTO 
 
 const deletebyChirpId = (chirpid: Chirp['id']) => Query("DELETE FROM mentions WHERE chirpid=?", [chirpid]);
 
+const deletebyUserId = (userid: User['id']) => Query("DELETE FROM mentions WHERE userid=?", [userid]);
+
+
 export default {
     create,
-    deletebyChirpId
+    deletebyChirpId,
+    deletebyUserId
 };
